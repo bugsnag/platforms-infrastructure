@@ -1,0 +1,6 @@
+[submodule "test/bugsnag-cocoa"]
+	path = test/bugsnag-cocoa
+	url = https://github.com/bugsnag/bugsnag-cocoa
+[submodule "test/bugsnag-js"]
+	path = test/bugsnag-js
+	url = https://github.com/bugsnag/bugsnag-js
