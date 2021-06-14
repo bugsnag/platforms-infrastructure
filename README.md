@@ -1,2 +1,3 @@
 # platforms-infrastructure
-Platforms infrastructure setup
+
+Scripts and other files needed for setting up Platforms infrastructure.
