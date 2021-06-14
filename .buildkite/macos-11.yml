@@ -1,0 +1,37 @@
+steps:
+  #
+  # Cocoa tests
+  #
+  - label: 'macOS 11.0 E2E tests (subset)'
+    depends_on:
+      - cocoa_fixture
+    timeout_in_minutes: 30
+    plugins:
+      artifacts#v1.3.0:
+        download: ["test/bugsnag-cocoa/features/fixtures/macos/output/macOSTestApp.zip"]
+        upload: ["test/bugsnag-cocoa/macOSTestApp.log", "test/bugsnag-cocoa/appium_server.log"]
+    commands:
+      - cd test/bugsnag-cocoa
+      - bundle install
+      - bundle exec maze-runner
+        --farm=local
+        --os=macos
+        --os-version=11.0
+        --app=macOSTestApp
+        --tags='not @skip_macos'
+        --fail-fast
+        features/handled_errors.feature
+
+  #
+  # React Native tests
+  #
+  - label: 'Build React Native test fixture for iOS'
+    key: "rn-0-64-ipa"
+    timeout_in_minutes: 30
+    env:
+      REACT_NATIVE_VERSION: rn0.64-hermes
+      NOTIFIER_VERSION: 7.10.1
+    artifact_paths: test/bugsnag-js/build/rn0.64-hermes.ipa
+    commands:
+      - cd test/bugsnag-js
+      - npm run test:build-react-native-ios

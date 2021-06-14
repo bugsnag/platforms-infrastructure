@@ -1,0 +1,14 @@
+steps:
+  #
+  # Build test fixture
+  #
+  - label: 'Build Cocoa test fixtures'
+    key: cocoa_fixture
+    timeout_in_minutes: 20
+    artifact_paths:
+      - test/bugsnag-cocoa/features/fixtures/ios-swift-cocoapods/output/iOSTestApp.ipa
+      - test/bugsnag-cocoa/features/fixtures/macos/output/macOSTestApp.zip
+    commands:
+      - cd test/bugsnag-cocoa
+      - ./features/scripts/export_ios_app.sh
+      - ./features/scripts/export_mac_app.sh
