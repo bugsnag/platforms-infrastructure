@@ -1,0 +1,6 @@
+# Files stored in S3
+.npmrc
+BugsnagCert.p12
+buildkite-agent.cfg
+environment
+expo/
