@@ -10,8 +10,8 @@ steps:
     agents:
       queue: opensource-mac-cocoa-11
     artifact_paths:
-      - features/fixtures/ios/output/iOSTestApp.ipa
-      - features/fixtures/macos/output/macOSTestApp.zip
+      - test/bugsnag-cocoa/features/fixtures/ios/output/iOSTestApp.ipa
+      - test/bugsnag-cocoa/features/fixtures/macos/output/macOSTestApp.zip
     commands:
       - cd test/bugsnag-cocoa
       - ./features/scripts/export_ios_app.sh
