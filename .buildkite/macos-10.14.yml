@@ -37,21 +37,12 @@ steps:
         --fail-fast
         features/barebone_tests.feature
 
-  - label: macOS 10.14 unit tests
-    timeout_in_minutes: 10
+  - label: 'examples/objective-c-osx'
     commands:
-      - cd test/bugsnag-cocoa
-      - bundle install
-      - ./scripts/run-unit-tests.sh PLATFORM=macOS
-    artifact_paths:
-      - logs/*
-
-  - label: macOS 10.14 unit tests - mic
-    timeout_in_minutes: 10
-    agents:
-      queue: opensource-mac-cocoa-10.14
-    commands:
-      - cd test/bugsnag-cocoa
-      - ./scripts/run-unit-tests.sh PLATFORM=macOS
-    artifact_paths:
-      - logs/*
+      - cd test/bugsnag-cocoa/examples/objective-c-osx
+      - echo "--- Pod install"
+      - pod install
+      - echo "+++ Build Release iOS"
+      - xcodebuild -workspace objective-c-osx.xcworkspace -scheme objective-c-osx -configuration Release -derivedDataPath DerivedData -quiet build GCC_TREAT_WARNINGS_AS_ERRORS=YES
+      - echo "+++ Build Debug iOS Simulator"
+      - xcodebuild -workspace objective-c-osx.xcworkspace -scheme objective-c-osx -configuration Debug -derivedDataPath DerivedData -quiet build GCC_TREAT_WARNINGS_AS_ERRORS=YES
