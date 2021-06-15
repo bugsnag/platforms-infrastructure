@@ -2,6 +2,20 @@ steps:
   #
   # Cocoa tests
   #
+
+  # Fixtures must be built with 10.15+
+  - label: Build cocoa IPA
+    key: cocoa_fixture
+    timeout_in_minutes: 20
+    agents:
+      queue: opensource-mac-cocoa-11
+    artifact_paths:
+      - features/fixtures/ios/output/iOSTestApp.ipa
+      - features/fixtures/macos/output/macOSTestApp.zip
+    commands:
+      - ./features/scripts/export_ios_app.sh
+      - ./features/scripts/export_mac_app.sh
+
   - label: 'macOS 10.13 E2E tests (subset)'
     depends_on:
       - cocoa_fixture
@@ -21,3 +35,10 @@ steps:
         --tags='not @skip_macos'
         --fail-fast
         features/barebone_tests.feature
+
+  - label: macOS 10.13 unit tests
+    timeout_in_minutes: 10
+    commands:
+      - ./scripts/run-unit-tests.sh PLATFORM=macOS
+    artifact_paths:
+      - logs/*
