@@ -13,6 +13,7 @@ steps:
       - features/fixtures/ios/output/iOSTestApp.ipa
       - features/fixtures/macos/output/macOSTestApp.zip
     commands:
+      - cd test/bugsnag-cocoa
       - ./features/scripts/export_ios_app.sh
       - ./features/scripts/export_mac_app.sh
 
@@ -39,6 +40,7 @@ steps:
   - label: macOS 10.13 unit tests
     timeout_in_minutes: 10
     commands:
+      - cd test/bugsnag-cocoa
       - ./scripts/run-unit-tests.sh PLATFORM=macOS
     artifact_paths:
       - logs/*
