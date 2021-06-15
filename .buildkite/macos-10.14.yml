@@ -45,3 +45,13 @@ steps:
       - ./scripts/run-unit-tests.sh PLATFORM=macOS
     artifact_paths:
       - logs/*
+
+  - label: macOS 10.14 unit tests - mic
+    timeout_in_minutes: 10
+    agents:
+      queue: opensource-mac-cocoa-10.14
+    commands:
+      - cd test/bugsnag-cocoa
+      - ./scripts/run-unit-tests.sh PLATFORM=macOS
+    artifact_paths:
+      - logs/*
