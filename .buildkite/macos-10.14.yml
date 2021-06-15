@@ -41,6 +41,7 @@ steps:
     timeout_in_minutes: 10
     commands:
       - cd test/bugsnag-cocoa
+      - bundle install
       - ./scripts/run-unit-tests.sh PLATFORM=macOS
     artifact_paths:
       - logs/*
