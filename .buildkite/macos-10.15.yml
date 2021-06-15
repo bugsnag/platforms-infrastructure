@@ -39,12 +39,6 @@ steps:
   #
   # Expo tests
   #
-  - label:  'TEMP TEST'
-    timeout_in_minutes: 3
-    agents:
-      queue: "opensource"
-    command: "echo Test"
-
   - label:  ':docker: Build expo publisher'
     key: "expo-publisher"
     timeout_in_minutes: 30
