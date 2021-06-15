@@ -1,0 +1,23 @@
+steps:
+  #
+  # Cocoa tests
+  #
+  - label: 'macOS 10.13 E2E tests (subset)'
+    depends_on:
+      - cocoa_fixture
+    timeout_in_minutes: 30
+    plugins:
+      artifacts#v1.3.0:
+        download: ["test/bugsnag-cocoa/features/fixtures/macos/output/macOSTestApp.zip"]
+        upload: ["test/bugsnag-cocoa/macOSTestApp.log", "test/bugsnag-cocoa/appium_server.log"]
+    commands:
+      - cd test/bugsnag-cocoa
+      - bundle install
+      - bundle exec maze-runner
+        --farm=local
+        --os=macos
+        --os-version=10.13
+        --app=macOSTestApp
+        --tags='not @skip_macos'
+        --fail-fast
+        features/barebone_tests.feature
