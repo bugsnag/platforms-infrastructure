@@ -2,6 +2,20 @@ steps:
   #
   # Cocoa tests
   #
+  - label: 'Build Cocoa test fixtures'
+    key: cocoa_fixture
+    timeout_in_minutes: 20
+    agents:
+      queue: "opensource-mac-cocoa-10.14"
+    artifact_paths:
+      - test/bugsnag-cocoa/features/fixtures/ios-swift-cocoapods/output/iOSTestApp.ipa
+      - test/bugsnag-cocoa/features/fixtures/macos/output/macOSTestApp.zip
+    commands:
+      - cd test/bugsnag-cocoa
+      - ./features/scripts/export_ios_app.sh
+      - ./features/scripts/export_mac_app.sh
+
+
   - label: 'macOS 10.14 E2E tests (subset)'
     depends_on:
       - cocoa_fixture
