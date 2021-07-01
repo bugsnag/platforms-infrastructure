@@ -1,5 +1,5 @@
 if [[ ! -d /Users/administrator ]]; then
-    echo /Users/administrator does not exist, exiting.
+    echo /Users/administrator does not exist, exiting.  Consider adding a symlink to the admin user.
     return
 fi
 
@@ -125,8 +125,9 @@ cp .npmrc /Users/administrator
 echo Installing Buildkite agent
 brew tap buildkite/buildkite
 brew install buildkite-agent
-cp /usr/local/etc/buildkite-agent/buildkite-agent.cfg /usr/local/etc/buildkite-agent/buildkite-agent.cfg.orig
-cp buildkite-agent.cfg /usr/local/etc/buildkite-agent/buildkite-agent.cfg
-ln -s /usr/local/etc/buildkite-agent/buildkite-agent.cfg /Users/administrator/buildkite-agent.cfg
-cp environment /usr/local/etc/buildkite-agent/hooks
+PREFIX=`brew --prefix`
+cp $PREFIX/etc/buildkite-agent/buildkite-agent.cfg $PREFIX/etc/buildkite-agent/buildkite-agent.cfg.orig
+cp buildkite-agent.cfg $PREFIX/etc/buildkite-agent/buildkite-agent.cfg
+ln -s $PREFIX/etc/buildkite-agent/buildkite-agent.cfg /Users/administrator/buildkite-agent.cfg
+cp environment $PREFIX/etc/buildkite-agent/hooks
 cp -r expo /Users/administrator

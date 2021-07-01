@@ -17,6 +17,7 @@ echo ==================================
 brew install --cask google-chrome
 brew install --cask textmate
 brew install --cask iterm2
+brew install coreutils
 
 # Clean up the dock
 brew install dockutil
