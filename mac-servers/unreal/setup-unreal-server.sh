@@ -49,7 +49,8 @@ rbenv global 2.7.1
 eval "$(rbenv init -)"
 
 brew tap homebrew/cask
-brew install --cask openjdk@11
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk8
 
 brew install ninja
 brew install --cask mono-mdk
