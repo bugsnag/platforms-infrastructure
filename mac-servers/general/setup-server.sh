@@ -16,6 +16,8 @@ echo ==================================
 
 brew install --cask google-chrome
 brew install --cask chromedriver
+brew install --cask firefox
+brew install geckodriver
 xattr -d com.apple.quarantine /usr/local/bin/chromedriver
 brew install --cask textmate
 brew install --cask iterm2
