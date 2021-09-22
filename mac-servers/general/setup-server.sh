@@ -133,3 +133,8 @@ cp buildkite-agent.cfg $PREFIX/etc/buildkite-agent/buildkite-agent.cfg
 ln -s $PREFIX/etc/buildkite-agent/buildkite-agent.cfg /Users/administrator/buildkite-agent.cfg
 cp environment $PREFIX/etc/buildkite-agent/hooks
 cp -r expo /Users/administrator
+
+# Install launchd agent to clean up drive space on login
+cp com.bugsnag.cleanup.agent.plist /Users/administrator/Library/LaunchAgents
+mkdir -p /Users/administrator/scripts
+cp cleanup.sh /Users/administrator/scripts
