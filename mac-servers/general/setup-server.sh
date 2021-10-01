@@ -51,6 +51,7 @@ brew install npm
 brew install carthage
 brew install rbenv
 brew install ruby-build
+brew install clang-format
 
 echo Node 14
 brew unlink node
@@ -109,6 +110,7 @@ echo Installing global NPM packages
 echo ==============================
 npm install -g turtle-cli@0.17.3 # Used to build Expo
 npm install -g appium # Used to run macOS end-to-end tests
+npm install -g cspell
 
 echo =========================
 echo Installing appium-for-mac
