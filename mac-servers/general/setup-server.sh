@@ -9,6 +9,7 @@ echo ===================
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew update
+BREW_PREFIX=`brew --prefix`
 
 echo ==================================
 echo Installing admin environment tools
@@ -88,6 +89,18 @@ then
   brew install --cask docker
   xcversion simulators --install='iOS 10.3.1'
   xcversion simulators --install='tvOS 10.2'
+
+  # Added for cocos2dx
+  brew install openjdk@11 jq ninja android-commandlinetools
+  export JAVA_HOME=/usr/local/opt/openjdk\@11
+  export PATH=$JAVA_HOME/bin:$PATH
+  export ANDROID_NDK_HOME=/usr/local/share/android-ndk
+  yes | $BREW_PREFIX/share/android-commandlinetools/cmdline-tools/homebrew/bin/sdkmanager "platforms;android-28"
+  yes | $BREW_PREFIX/share/android-commandlinetools/cmdline-tools/homebrew/bin/sdkmanager --licenses
+  curl --silent -o ndk.zip https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip
+  unzip -qq ndk.zip
+  rm ndk.zip
+  mv android-ndk-r16b /usr/local/share/android-ndk
 fi
 if [[ $VERSION == "11."* ]];
 then
@@ -131,11 +144,10 @@ cp .npmrc /Users/administrator
 echo Installing Buildkite agent
 brew tap buildkite/buildkite
 brew install buildkite-agent
-PREFIX=`brew --prefix`
-cp $PREFIX/etc/buildkite-agent/buildkite-agent.cfg $PREFIX/etc/buildkite-agent/buildkite-agent.cfg.orig
-cp buildkite-agent.cfg $PREFIX/etc/buildkite-agent/buildkite-agent.cfg
-ln -s $PREFIX/etc/buildkite-agent/buildkite-agent.cfg /Users/administrator/buildkite-agent.cfg
-cp environment $PREFIX/etc/buildkite-agent/hooks
+cp $BREW_PREFIX/etc/buildkite-agent/buildkite-agent.cfg $BREW_PREFIX/etc/buildkite-agent/buildkite-agent.cfg.orig
+cp buildkite-agent.cfg $BREW_PREFIX/etc/buildkite-agent/buildkite-agent.cfg
+ln -s $BREW_PREFIX/etc/buildkite-agent/buildkite-agent.cfg /Users/administrator/buildkite-agent.cfg
+cp environment $BREW_PREFIX/etc/buildkite-agent/hooks
 cp -r expo /Users/administrator
 
 # Install launchd agent to clean up drive space on login
